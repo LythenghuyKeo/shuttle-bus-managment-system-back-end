@@ -90,7 +90,7 @@ const get_all_booking = asyncHandler(async(req,res)=>{
 const cancel_booking = asyncHandler(async(req,res)=>{
     const bookingId = req.body.bookedId
     const user_id =req.user_id
-    const my_booking = await BookingInfo.find({userId:user_id,_id:bookingId})
+    const my_booking = await BookingInfo.findOne({userId:user_id,_id:bookingId})
     if (my_booking !=null && my_booking.status =='pending'){
         const updateStatus = await BookingInfo.updateOne({_id:bookingId},{$set:{status:"cancelled"}})
         console.log(my_booking.status)
